@@ -1,36 +1,37 @@
-import { FC } from 'react'
-import { Outlet } from 'react-router-dom'
-import { Layout, Spin } from 'antd'
+import {FC} from 'react'
+import {Outlet} from 'react-router-dom'
+import {Layout, Spin} from 'antd'
 import Logo from '../components/Logo'
 import UserInfo from '../components/UserInfo'
 import useLoadUserData from '../hooks/useLoadUserData'
 import useNavPage from '../hooks/useNavPage'
 import styles from './MainLayout.module.scss'
 
-const { Header, Content, Footer } = Layout
+const {Header, Content, Footer} = Layout
 
 const MainLayout: FC = () => {
-  const { waitingUserData } = useLoadUserData()
+  const {waitingUserData} = useLoadUserData()
   useNavPage(waitingUserData)
-
+  
   return (
     <Layout>
       <Header className={styles.header}>
         <div className={styles.left}>
-          <Logo />
+          {/*<Logo/>*/}
         </div>
         <div className={styles.right}>
-          <UserInfo />
+          <UserInfo/>
         </div>
       </Header>
       <Layout className={styles.main}>
         <Content>
+          <Outlet/>
           {waitingUserData ? (
-            <div style={{ textAlign: 'center', marginTop: '60px' }}>
-              <Spin />
+            <div style={{textAlign: 'center', marginTop: '60px'}}>
+              <Spin/>
             </div>
           ) : (
-            <Outlet />
+            <Outlet/>
           )}
         </Content>
       </Layout>

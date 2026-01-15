@@ -5,9 +5,9 @@ import { ExclamationCircleOutlined } from '@ant-design/icons'
 import { useRequest } from 'ahooks'
 import ListSearch from '../../components/ListSearch'
 import ListPage from '../../components/ListPage'
-import useLoadQuestionListData from '../../hooks/useLoadQuestionListData'
-import { updateQuestionService, deleteQuestionsService } from '../../services/question'
+// import { updateQuestionService, deleteQuestionsService } from '../../services/question'
 import styles from './common.module.scss'
+import useLoadQuestionListData from "../../hooks/useLoadQuestionListData.ts";
 
 const { Title } = Typography
 const { confirm } = Modal
@@ -22,44 +22,44 @@ const Trash: FC = () => {
   const [selectedIds, setSelectedIds] = useState<string[]>([])
 
   // 恢复
-  const { run: recover } = useRequest(
-    async () => {
-      for await (const id of selectedIds) {
-        await updateQuestionService(id, { isDeleted: false })
-      }
-    },
-    {
-      manual: true,
-      debounceWait: 500, // 防抖
-      onSuccess() {
-        message.success('恢复成功')
-        refresh() // 手动刷新列表
-        setSelectedIds([])
-      },
-    }
-  )
+  // const { run: recover } = useRequest(
+  //   async () => {
+  //     for await (const id of selectedIds) {
+  //       await updateQuestionService(id, { isDeleted: false })
+  //     }
+  //   },
+  //   {
+  //     manual: true,
+  //     debounceWait: 500, // 防抖
+  //     onSuccess() {
+  //       message.success('恢复成功')
+  //       refresh() // 手动刷新列表
+  //       setSelectedIds([])
+  //     },
+  //   }
+  // )
 
   // 删除
-  const { run: deleteQuestion } = useRequest(
-    async () => await deleteQuestionsService(selectedIds),
-    {
-      manual: true,
-      onSuccess() {
-        message.success('删除成功')
-        refresh()
-        setSelectedIds([])
-      },
-    }
-  )
+  // const { run: deleteQuestion } = useRequest(
+  //   async () => await deleteQuestionsService(selectedIds),
+  //   {
+  //     manual: true,
+  //     onSuccess() {
+  //       message.success('删除成功')
+  //       refresh()
+  //       setSelectedIds([])
+  //     },
+  //   }
+  // )
 
-  function del() {
-    confirm({
-      title: '确认彻底删除该问卷？',
-      icon: <ExclamationCircleOutlined />,
-      content: '删除以后不可以找回',
-      onOk: deleteQuestion,
-    })
-  }
+  // function del() {
+  //   confirm({
+  //     title: '确认彻底删除该问卷？',
+  //     icon: <ExclamationCircleOutlined />,
+  //     content: '删除以后不可以找回',
+  //     onOk: deleteQuestion,
+  //   })
+  // }
 
   const tableColumns = [
     {
@@ -87,30 +87,30 @@ const Trash: FC = () => {
   // 可以把 JSX 片段定义为一个变量
   const TableElem = (
     <>
-      <div style={{ marginBottom: '16px' }}>
-        <Space>
-          <Button type="primary" disabled={selectedIds.length === 0} onClick={recover}>
-            恢复
-          </Button>
-          <Button danger disabled={selectedIds.length === 0} onClick={del}>
-            彻底删除
-          </Button>
-        </Space>
-      </div>
-      <div style={{ border: '1px solid #e8e8e8' }}>
-        <Table
-          dataSource={list}
-          columns={tableColumns}
-          pagination={false}
-          rowKey={q => q._id}
-          rowSelection={{
-            type: 'checkbox',
-            onChange: selectedRowKeys => {
-              setSelectedIds(selectedRowKeys as string[])
-            },
-          }}
-        />
-      </div>
+      {/*<div style={{ marginBottom: '16px' }}>*/}
+      {/*  <Space>*/}
+      {/*    <Button type="primary" disabled={selectedIds.length === 0} onClick={recover}>*/}
+      {/*      恢复*/}
+      {/*    </Button>*/}
+      {/*    <Button danger disabled={selectedIds.length === 0} onClick={del}>*/}
+      {/*      彻底删除*/}
+      {/*    </Button>*/}
+      {/*  </Space>*/}
+      {/*</div>*/}
+      {/*<div style={{ border: '1px solid #e8e8e8' }}>*/}
+      {/*  <Table*/}
+      {/*    dataSource={list}*/}
+      {/*    columns={tableColumns}*/}
+      {/*    pagination={false}*/}
+      {/*    rowKey={q => q._id}*/}
+      {/*    rowSelection={{*/}
+      {/*      type: 'checkbox',*/}
+      {/*      onChange: selectedRowKeys => {*/}
+      {/*        setSelectedIds(selectedRowKeys as string[])*/}
+      {/*      },*/}
+      {/*    }}*/}
+      {/*  />*/}
+      {/*</div>*/}
     </>
   )
 

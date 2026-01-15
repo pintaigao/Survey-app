@@ -1,11 +1,11 @@
-import { FC, useEffect, useState, useRef, useMemo } from 'react'
-import { Typography, Spin, Empty } from 'antd'
-import { useTitle, useDebounceFn, useRequest } from 'ahooks'
-import { useSearchParams } from 'react-router-dom'
-import { getQuestionListService } from '../../services/question'
+import {FC, useEffect, useMemo, useRef, useState} from 'react'
+import {Empty, Spin, Typography} from 'antd'
+import {useDebounceFn, useRequest, useTitle} from 'ahooks'
+import {useSearchParams} from 'react-router-dom'
+import {getQuestionListService} from '../../services/question'
 import QuestionCard from '../../components/QuestionCard'
 import ListSearch from '../../components/ListSearch'
-import { LIST_PAGE_SIZE, LIST_SEARCH_PARAM_KEY } from '../../constant/index'
+import {LIST_PAGE_SIZE, LIST_SEARCH_PARAM_KEY} from '../../constant/index'
 import styles from './common.module.scss'
 
 const { Title } = Typography
@@ -33,17 +33,13 @@ const List: FC = () => {
   // 真正加载
   const { run: load, loading } = useRequest(
     async () => {
-      const data = await getQuestionListService({
-        page,
-        pageSize: LIST_PAGE_SIZE,
-        keyword,
-      })
-      return data
+      return await getQuestionListService({page, pageSize: LIST_PAGE_SIZE, keyword})
     },
     {
       manual: true,
       onSuccess(result) {
         const { list: l = [], total = 0 } = result
+        
         setList(list.concat(l)) // 累计
         setTotal(total)
         setPage(page + 1)
@@ -80,7 +76,7 @@ const List: FC = () => {
     if (haveMoreData) {
       window.addEventListener('scroll', tryLoadMore) // 防抖
     }
-    
+
     return () => {
       window.removeEventListener('scroll', tryLoadMore) // 解绑事件，重要！！！
     }
@@ -107,7 +103,7 @@ const List: FC = () => {
       <div className={styles.content}>
         {/* 问卷列表 */}
         {list.length > 0 &&
-          list.map((q: any) => {
+          list.map(q => {
             const { _id } = q
             return <QuestionCard key={_id} {...q} />
           })}

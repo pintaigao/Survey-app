@@ -1,8 +1,9 @@
-import React, { FC } from 'react'
+import {FC, useEffect} from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Button, Typography } from 'antd'
 import { MANAGE_INDEX_PATHNAME } from '../router'
 import styles from './Home.module.scss'
+import axios from "axios";
 
 // import axios from 'axios'
 // import '../_mock/index.ts'
@@ -11,7 +12,6 @@ const { Title, Paragraph } = Typography
 
 const Home: FC = () => {
   const nav = useNavigate()
-
   // useEffect(() => {
   //   // fetch('/api/test')
   //   //   .then(res => res.json())
@@ -22,12 +22,7 @@ const Home: FC = () => {
   //   axios.get('/api/test').then(res => console.log('axios data', res.data))
   // }, [])
 
-  // useEffect(() => {
-  //   // fetch('/api/test')
-  //   //   .then(res => res.json())
-  //   //   .then(data => console.log('fetch data', data))
-  //   // axios.get('/api/test').then(res => console.log('axios data', res.data))
-  // })
+  useEffect(() => {axios.get('/api/test').then(res => console.log('axios data', res.data))})
 
   function clickHandler() {
     // nav('/login')
