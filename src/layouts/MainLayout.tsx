@@ -1,7 +1,6 @@
 import {FC} from 'react'
 import {Outlet} from 'react-router-dom'
 import {Layout, Spin} from 'antd'
-import Logo from '../components/Logo'
 import UserInfo from '../components/UserInfo'
 import useLoadUserData from '../hooks/useLoadUserData'
 import useNavPage from '../hooks/useNavPage'
@@ -11,6 +10,7 @@ const {Header, Content, Footer} = Layout
 
 const MainLayout: FC = () => {
   const {waitingUserData} = useLoadUserData()
+  
   useNavPage(waitingUserData)
   
   return (

@@ -3,10 +3,10 @@ import {Button, message} from 'antd'
 import {Link, useNavigate} from 'react-router-dom'
 import {UserOutlined} from '@ant-design/icons'
 import {LOGIN_PATHNAME} from '../router'
-import useGetUserInfo from "../hooks/useGetUserInfo.ts";
 import {removeToken} from "../utils/user-token.ts";
 import {useDispatch} from "react-redux";
 import {logoutReducer} from '../store/userReducer'
+import useGetUserInfo from "../hooks/useGetUserInfo.ts";
 
 const UserInfo: FC = () => {
   const nav = useNavigate()

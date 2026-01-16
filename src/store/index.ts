@@ -14,10 +14,8 @@ export type StateType = {
 export default configureStore({
   reducer: {
     user: userReducer,
-
-    // // 没有 undo
+    // 没有 undo
     // components: componentsReducer,
-
     // 增加了 undo
     components: undoable(componentsReducer, {
       limit: 20, // 限制 undo 20 步

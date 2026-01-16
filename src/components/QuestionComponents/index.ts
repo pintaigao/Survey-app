@@ -1,17 +1,11 @@
-import type { FC } from 'react'
-import QuestionInputConf, { QuestionInputPropsType } from './QuestionInput/index'
-import QuestionTitleConf, { QuestionTitlePropsType } from './QuestionTitle'
-import QuestionParagraphConf, { QuestionParagraphPropsType } from './QuestionParagraph'
-import QuestionInfoConf, { QuestionInfoPropsType } from './QuestionInfo'
-import QuestionTextareaConf, { QuestionTextareaPropsType } from './QuestionTextarea'
-import QuestionRadioConf, {
-  QuestionRadioPropsType,
-  QuestionRadioStatPropsType,
-} from './QuestionRadio'
-import QuestionCheckboxConf, {
-  QuestionCheckboxPropsType,
-  QuestionCheckboxStatPropsType,
-} from './QuestionCheckbox'
+import type {FC} from 'react'
+import QuestionInputConf, {QuestionInputPropsType} from './QuestionInput/index'
+import QuestionTitleConf, {QuestionTitlePropsType} from './QuestionTitle'
+import QuestionParagraphConf, {QuestionParagraphPropsType} from './QuestionParagraph'
+import QuestionInfoConf, {QuestionInfoPropsType} from './QuestionInfo'
+import QuestionTextareaConf, {QuestionTextareaPropsType} from './QuestionTextarea'
+import QuestionRadioConf, {QuestionRadioPropsType, QuestionRadioStatPropsType} from './QuestionRadio'
+import QuestionCheckboxConf, {QuestionCheckboxPropsType, QuestionCheckboxStatPropsType} from './QuestionCheckbox'
 
 // 统一，各个组件的 prop type
 export type ComponentPropsType = QuestionInputPropsType &

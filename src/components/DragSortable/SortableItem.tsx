@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, {FC, JSX} from 'react'
 import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
 

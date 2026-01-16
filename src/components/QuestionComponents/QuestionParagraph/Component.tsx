@@ -4,6 +4,7 @@ import { QuestionParagraphPropsType, QuestionParagraphDefaultProps } from './int
 
 const { Paragraph } = Typography
 
+// 渲染的基础组件
 const Component: FC<QuestionParagraphPropsType> = (props: QuestionParagraphPropsType) => {
   const { text = '', isCenter = false } = { ...QuestionParagraphDefaultProps, ...props }
 

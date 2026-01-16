@@ -1,8 +1,8 @@
-import React, { FC, useState, ChangeEvent } from 'react'
+import React, {FC, useState, ChangeEvent} from 'react'
 import classNames from 'classnames'
-import { message, Input, Button, Space } from 'antd'
-import { EyeInvisibleOutlined, LockOutlined } from '@ant-design/icons'
-import { useDispatch } from 'react-redux'
+import {message, Input, Button, Space} from 'antd'
+import {EyeInvisibleOutlined, LockOutlined} from '@ant-design/icons'
+import {useDispatch} from 'react-redux'
 import useGetComponentInfo from '../../../hooks/useGetComponentInfo'
 import {
   changeSelectedId,
@@ -16,12 +16,12 @@ import SortableItem from '../../../components/DragSortable/SortableItem'
 import styles from './Layers.module.scss'
 
 const Layers: FC = () => {
-  const { componentList, selectedId } = useGetComponentInfo()
+  const {componentList, selectedId} = useGetComponentInfo()
   const dispatch = useDispatch()
-
+  
   // 记录当前正在修改标题的组件
   const [changingTitleId, setChangingTitleId] = useState('')
-
+  
   // 点击选中组件
   function handleTitleClick(fe_id: string) {
     const curComp = componentList.find(c => c.fe_id === fe_id)
@@ -35,44 +35,44 @@ const Layers: FC = () => {
       setChangingTitleId('')
       return
     }
-
+    
     // 点击修改标题
     setChangingTitleId(fe_id)
   }
-
+  
   // 修改标题
   function changeTitle(event: ChangeEvent<HTMLInputElement>) {
     const newTitle = event.target.value.trim()
     if (!newTitle) return
     if (!selectedId) return
-    dispatch(changeComponentTitle({ fe_id: selectedId, title: newTitle }))
+    dispatch(changeComponentTitle({fe_id: selectedId, title: newTitle}))
   }
-
+  
   // 切换 隐藏/显示
   function changeHidden(fe_id: string, isHidden: boolean) {
-    dispatch(changeComponentHidden({ fe_id, isHidden }))
+    dispatch(changeComponentHidden({fe_id, isHidden}))
   }
-
+  
   // 切换 锁定/解锁
   function changeLocked(fe_id: string) {
-    dispatch(toggleComponentLocked({ fe_id }))
+    dispatch(toggleComponentLocked({fe_id}))
   }
-
+  
   // SortableContainer 组件的 items 属性，需要每个 item 都有 id
   const componentListWithId = componentList.map(c => {
-    return { ...c, id: c.fe_id }
+    return {...c, id: c.fe_id}
   })
-
+  
   // 拖拽排序结束
   function handleDragEnd(oldIndex: number, newIndex: number) {
-    dispatch(moveComponent({ oldIndex, newIndex }))
+    dispatch(moveComponent({oldIndex, newIndex}))
   }
-
+  
   return (
     <SortableContainer items={componentListWithId} onDragEnd={handleDragEnd}>
       {componentList.map(c => {
-        const { fe_id, title, isHidden, isLocked } = c
-
+        const {fe_id, title, isHidden, isLocked} = c
+        
         // 拼接 title className
         const titleDefaultClassName = styles.title
         const selectedClassName = styles.selected
@@ -80,7 +80,7 @@ const Layers: FC = () => {
           [titleDefaultClassName]: true,
           [selectedClassName]: fe_id === selectedId,
         })
-
+        
         return (
           <SortableItem key={fe_id} id={fe_id}>
             <div className={styles.wrapper}>
@@ -90,8 +90,7 @@ const Layers: FC = () => {
                     value={title}
                     onChange={changeTitle}
                     onPressEnter={() => setChangingTitleId('')}
-                    onBlur={() => setChangingTitleId('')}
-                  />
+                    onBlur={() => setChangingTitleId('')}/>
                 )}
                 {fe_id !== changingTitleId && title}
               </div>
@@ -101,18 +100,16 @@ const Layers: FC = () => {
                     size="small"
                     shape="circle"
                     className={!isHidden ? styles.btn : ''}
-                    icon={<EyeInvisibleOutlined />}
+                    icon={<EyeInvisibleOutlined/>}
                     type={isHidden ? 'primary' : 'text'}
-                    onClick={() => changeHidden(fe_id, !isHidden)}
-                  />
+                    onClick={() => changeHidden(fe_id, !isHidden)}/>
                   <Button
                     size="small"
                     shape="circle"
                     className={!isLocked ? styles.btn : ''}
-                    icon={<LockOutlined />}
+                    icon={<LockOutlined/>}
                     type={isLocked ? 'primary' : 'text'}
-                    onClick={() => changeLocked(fe_id)}
-                  />
+                    onClick={() => changeLocked(fe_id)}/>
                 </Space>
               </div>
             </div>

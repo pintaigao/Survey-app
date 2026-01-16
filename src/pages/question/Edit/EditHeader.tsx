@@ -1,31 +1,31 @@
-import React, { FC, useState, ChangeEvent } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
-import { Button, Typography, Space, Input, message } from 'antd'
-import { LeftOutlined, EditOutlined, LoadingOutlined } from '@ant-design/icons'
-import { useRequest, useKeyPress, useDebounceEffect } from 'ahooks'
+import React, {FC, useState, ChangeEvent} from 'react'
+import {useNavigate, useParams} from 'react-router-dom'
+import {useDispatch} from 'react-redux'
+import {Button, Typography, Space, Input, message} from 'antd'
+import {LeftOutlined, EditOutlined, LoadingOutlined} from '@ant-design/icons'
+import {useRequest, useKeyPress, useDebounceEffect} from 'ahooks'
 import EditToolbar from './EditToolbar'
 import useGetPageInfo from '../../../hooks/useGetPageInfo'
 import useGetComponentInfo from '../../../hooks/useGetComponentInfo'
-import { changePageTitle } from '../../../store/pageInfoReducer'
-import { updateQuestionService } from '../../../services/question'
+import {changePageTitle} from '../../../store/pageInfoReducer'
+import {updateQuestionService} from '../../../services/question'
 import styles from './EditHeader.module.scss'
 
-const { Title } = Typography
+const {Title} = Typography
 
 // 显示和修改标题
 const TitleElem: FC = () => {
-  const { title } = useGetPageInfo()
+  const {title} = useGetPageInfo()
   const dispatch = useDispatch()
-
+  
   const [editState, SetEditState] = useState(false)
-
+  
   function handleChange(event: ChangeEvent<HTMLInputElement>) {
     const newTitle = event.target.value.trim()
     if (!newTitle) return
     dispatch(changePageTitle(newTitle))
   }
-
+  
   if (editState) {
     return (
       <Input
@@ -36,35 +36,35 @@ const TitleElem: FC = () => {
       />
     )
   }
-
+  
   return (
     <Space>
       <Title>{title}</Title>
-      <Button icon={<EditOutlined />} type="text" onClick={() => SetEditState(true)} />
+      <Button icon={<EditOutlined/>} type="text" onClick={() => SetEditState(true)}/>
     </Space>
   )
 }
 
 // 保存按钮
 const SaveButton: FC = () => {
-  const { id } = useParams()
-  const { componentList = [] } = useGetComponentInfo()
+  const {id} = useParams()
+  const {componentList = []} = useGetComponentInfo()
   const pageInfo = useGetPageInfo()
-
-  const { loading, run: save } = useRequest(
+  
+  const {loading, run: save} = useRequest(
     async () => {
       if (!id) return
-      await updateQuestionService(id, { ...pageInfo, componentList })
+      await updateQuestionService(id, {...pageInfo, componentList})
     },
-    { manual: true }
+    {manual: true}
   )
-
+  
   // 快捷键
   useKeyPress(['ctrl.s', 'meta.s'], (event: KeyboardEvent) => {
     event.preventDefault()
     if (!loading) save()
   })
-
+  
   // 自定保存（不是定期保存，不是定时器）
   useDebounceEffect(
     () => {
@@ -75,9 +75,9 @@ const SaveButton: FC = () => {
       wait: 1000,
     }
   )
-
+  
   return (
-    <Button onClick={save} disabled={loading} icon={loading ? <LoadingOutlined /> : null}>
+    <Button onClick={save} disabled={loading} icon={loading ? <LoadingOutlined/> : null}>
       保存
     </Button>
   )
@@ -86,11 +86,11 @@ const SaveButton: FC = () => {
 // 发布按钮
 const PublishButton: FC = () => {
   const nav = useNavigate()
-  const { id } = useParams()
-  const { componentList = [] } = useGetComponentInfo()
+  const {id} = useParams()
+  const {componentList = []} = useGetComponentInfo()
   const pageInfo = useGetPageInfo()
-
-  const { loading, run: pub } = useRequest(
+  
+  const {loading, run: pub} = useRequest(
     async () => {
       if (!id) return
       await updateQuestionService(id, {
@@ -107,7 +107,7 @@ const PublishButton: FC = () => {
       },
     }
   )
-
+  
   return (
     <Button type="primary" onClick={pub} disabled={loading}>
       发布
@@ -118,25 +118,25 @@ const PublishButton: FC = () => {
 // 编辑器头部
 const EditHeader: FC = () => {
   const nav = useNavigate()
-
+  
   return (
     <div className={styles['header-wrapper']}>
       <div className={styles.header}>
         <div className={styles.left}>
           <Space>
-            <Button type="link" icon={<LeftOutlined />} onClick={() => nav(-1)}>
+            <Button type="link" icon={<LeftOutlined/>} onClick={() => nav(-1)}>
               返回
             </Button>
-            <TitleElem />
+            <TitleElem/>
           </Space>
         </div>
         <div className={styles.main}>
-          <EditToolbar />
+          <EditToolbar/>
         </div>
         <div className={styles.right}>
           <Space>
-            <SaveButton />
-            <PublishButton />
+            <SaveButton/>
+            <PublishButton/>
           </Space>
         </div>
       </div>

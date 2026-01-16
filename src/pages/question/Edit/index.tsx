@@ -1,5 +1,4 @@
 import { FC } from 'react'
-import { useParams } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { useTitle } from 'ahooks'
 import { changeSelectedId } from '../../../store/componentsReducer'

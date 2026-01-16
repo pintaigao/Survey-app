@@ -6,6 +6,7 @@ import {arrayMove} from '@dnd-kit/sortable'
 import {ComponentPropsType} from '../../components/QuestionComponents'
 import {getNextSelectedId, insertNewComponent} from './utils'
 
+// 相当于 pageInfo
 export type ComponentInfoType = {
   fe_id: string // 前端生成的 id ，服务端 Mongodb 不认这种格式，所以自定义一个 fe_id
   type: string

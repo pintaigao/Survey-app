@@ -1,17 +1,17 @@
-import { useEffect } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
-import useGetUserInfo from './useGetUserInfo'
+import {useEffect} from 'react'
+import {useLocation, useNavigate} from 'react-router-dom'
 import {isLoginOrRegister, isNoNeedUserInfo, MANAGE_INDEX_PATHNAME, LOGIN_PATHNAME} from '../router/index'
+import useGetUserInfo from './useGetUserInfo'
 
 // 判断是否登录
 function useNavPage(waitingUserData: boolean) {
-  const { username } = useGetUserInfo()
-  const { pathname } = useLocation()
+  const {username} = useGetUserInfo()
+  const {pathname} = useLocation()
   const nav = useNavigate()
-
+  
   useEffect(() => {
     if (waitingUserData) return
-
+    
     // 已经登录了
     if (username) {
       if (isLoginOrRegister(pathname)) {
@@ -19,7 +19,7 @@ function useNavPage(waitingUserData: boolean) {
       }
       return
     }
-
+    
     // 未登录
     if (isNoNeedUserInfo(pathname)) {
       return
