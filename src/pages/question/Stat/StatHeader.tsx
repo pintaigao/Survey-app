@@ -3,7 +3,7 @@ import { Space, Button, Typography, Input, Tooltip, message, Popover } from 'ant
 import type { InputRef } from 'antd'
 import { LeftOutlined, CopyOutlined, QrcodeOutlined } from '@ant-design/icons'
 import { useNavigate, useParams } from 'react-router-dom'
-import QRCode from 'qrcode.react'
+import { QRCodeSVG } from 'qrcode.react'
 import useGetPageInfo from '../../../hooks/useGetPageInfo'
 import styles from './StatHeader.module.scss'
 
@@ -25,31 +25,31 @@ const StatHeader: FC = () => {
     message.success('拷贝成功')
   }
 
-  // function genLinkAndQRCodeElem() {
-  //   if (!isPublished) return null
+  function genLinkAndQRCodeElem() {
+    if (!isPublished) return null
 
-  //   // 拼接 url ，需要参考 C 端的规则
-  //   const url = `http://localhost:3000/question/${id}`
+    // 拼接 url ，需要参考 C 端的规则
+    const url = `http://localhost:3000/question/${id}`
 
-  //   // 定义二维码组件
-  //   const QRCodeElem = (
-  //     <div style={{ textAlign: 'center' }}>
-  //       <QRCode value={url} size={150} />
-  //     </div>
-  //   )
+    // 定义二维码组件
+    const QRCodeElem = (
+      <div style={{ textAlign: 'center' }}>
+        <QRCodeSVG value={url} size={150} />
+      </div>
+    )
 
-  //   return (
-  //     <Space>
-  //       <Input value={url} style={{ width: '300px' }} ref={urlInputRef} />
-  //       <Tooltip title="拷贝链接">
-  //         <Button icon={<CopyOutlined />} onClick={copy}></Button>
-  //       </Tooltip>
-  //       <Popover content={QRCodeElem}>
-  //         <Button icon={<QrcodeOutlined />}></Button>
-  //       </Popover>
-  //     </Space>
-  //   )
-  // }
+    return (
+      <Space>
+        <Input value={url} style={{ width: '300px' }} ref={urlInputRef} />
+        <Tooltip title="拷贝链接">
+          <Button icon={<CopyOutlined />} onClick={copy}></Button>
+        </Tooltip>
+        <Popover content={QRCodeElem}>
+          <Button icon={<QrcodeOutlined />}></Button>
+        </Popover>
+      </Space>
+    )
+  }
 
   // 使用 useMemo 1. 依赖项是否经常变化; 2. 缓存的元素是否创建成本较高
   const LinkAndQRCodeElem = useMemo(() => {
@@ -61,7 +61,7 @@ const StatHeader: FC = () => {
     // 定义二维码组件
     const QRCodeElem = (
       <div style={{ textAlign: 'center' }}>
-        <QRCode value={url} size={150} />
+        <QRCodeSVG value={url} size={150} />
       </div>
     )
 

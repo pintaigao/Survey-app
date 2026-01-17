@@ -1,5 +1,5 @@
-import  { lazy } from 'react'
-import { createBrowserRouter } from 'react-router-dom'
+import {lazy} from 'react'
+import {createBrowserRouter} from 'react-router-dom'
 
 import MainLayout from '../layouts/MainLayout'
 import ManageLayout from '../layouts/ManageLayout'
@@ -21,55 +21,55 @@ const Stat = lazy(() => import(/* webpackChunkName: "statPage" */ '../pages/ques
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <MainLayout />,
+    element: <MainLayout/>,
     children: [
       {
         path: '/',
-        element: <Home />,
+        element: <Home/>,
       },
       {
         path: 'login',
-        element: <Login />,
+        element: <Login/>,
       },
       {
         path: 'register',
-        element: <Register />,
+        element: <Register/>,
       },
       {
         path: 'manage',
-        element: <ManageLayout />,
+        element: <ManageLayout/>,
         children: [
           {
             path: 'list',
-            element: <List />,
+            element: <List/>,
           },
           {
             path: 'star',
-            element: <Star />,
+            element: <Star/>,
           },
           {
             path: 'trash',
-            element: <Trash />,
+            element: <Trash/>,
           },
         ],
       },
       {
         path: '*', // 404 路由配置，都写在最后（兜底）
-        element: <NotFound />,
+        element: <NotFound/>,
       },
     ],
   },
   {
     path: 'question',
-    element: <QuestionLayout />,
+    element: <QuestionLayout/>,
     children: [
       {
         path: 'edit/:id',
-        element: <Edit />,
+        element: <Edit/>,
       },
       {
         path: 'stat/:id', // statistic 统计
-        element: <Stat />,
+        element: <Stat/>,
       },
     ],
   },

@@ -1,5 +1,4 @@
-import type {ResDataType} from "./ajax.ts";
-import axios from "axios";
+import axios, {ResDataType} from "./ajax.ts";
 
 type SearchOption = {
   keyword: string

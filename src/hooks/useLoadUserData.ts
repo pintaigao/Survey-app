@@ -23,6 +23,7 @@ function useLoadUserData() {
 
   // 判断当前 redux store 是否已经存在用户信息
   const { username } = useGetUserInfo() // redux store
+  console.log(username)
   
   useEffect(() => {
     if (username) {

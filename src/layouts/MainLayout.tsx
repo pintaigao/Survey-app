@@ -25,14 +25,11 @@ const MainLayout: FC = () => {
       </Header>
       <Layout className={styles.main}>
         <Content>
-          <Outlet/>
           {waitingUserData ? (
             <div style={{textAlign: 'center', marginTop: '60px'}}>
               <Spin/>
             </div>
-          ) : (
-            <Outlet/>
-          )}
+          ) : ( <Outlet/> )}
         </Content>
       </Layout>
       <Footer className={styles.footer}>小慕问卷 &copy;2023 - present. Created by 双越老师</Footer>

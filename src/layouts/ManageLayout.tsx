@@ -1,4 +1,4 @@
-import {FC, useState} from 'react'
+import {FC} from 'react'
 import {Outlet, useNavigate, useLocation} from 'react-router-dom'
 import {Button, Space, Divider, message} from 'antd'
 import {BarsOutlined, DeleteOutlined, PlusOutlined, StarOutlined} from '@ant-design/icons'
@@ -26,9 +26,13 @@ const ManageLayout: FC = () => {
   const {loading, error, run: handleCreateClick} = useRequest(createQuestionService, {
     manual: true,
     onSuccess(result) {
-      nav(`/question/edit/${result.id}`)
+      nav(`/question/edit/${result.data.data.id}`)
       message.success('创建成功')
     },
+    onError() {
+      console.log(error)
+      message.error('创建失败，请稍后重试')
+    }
   })
   
   return (
