@@ -26,7 +26,7 @@ const ManageLayout: FC = () => {
   const {loading, error, run: handleCreateClick} = useRequest(createQuestionService, {
     manual: true,
     onSuccess(result) {
-      nav(`/question/edit/${result.data.data.id}`)
+      nav(`/question/edit/${result.id || result._id}`)
       message.success('创建成功')
     },
     onError() {

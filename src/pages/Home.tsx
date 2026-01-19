@@ -22,7 +22,7 @@ const Home: FC = () => {
   //   axios.get('/api/test').then(res => console.log('axios data', res.data))
   // }, [])
 
-  useEffect(() => {axios.get('/api/test').then(res => console.log('axios data', res.data))})
+  // useEffect(() => {axios.get('/api/test').then(res => console.log('axios data', res.data))})
 
   function clickHandler() {
     // nav('/login')
